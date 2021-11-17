@@ -7,23 +7,16 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const faker = require("faker");
 const client = require("../../db/client");
-const {
-  getUserById,
-  createUser,
-  getUser,
-} = require("../../db");
+const { getUserById, createUser, getUser } = require("../../db");
 const { createFakeUser } = require("../helpers");
 
 describe("DB Users", () => {
-
-
   describe("createUser({ username, password })", () => {
-
     it("Creates the user", async () => {
       const fakeUserData = {
         username: "Horace",
         password: faker.internet.password(),
-      }
+      };
 
       const user = await createUser(fakeUserData);
 
@@ -37,7 +30,7 @@ describe("DB Users", () => {
       const fakeUserData = {
         username: "Harry",
         password: faker.internet.password(),
-      }
+      };
       const user = await createUser(fakeUserData);
       const queriedUser = await getUserById(user.id);
       expect(queriedUser.password).not.toBe(fakeUserData.password);
@@ -50,7 +43,9 @@ describe("DB Users", () => {
       };
       const user = await createUser(fakeUserData);
 
-      const {rows: [queriedUser]} = await client.query(
+      const {
+        rows: [queriedUser],
+      } = await client.query(
         `
         SELECT * from users
         WHERE id = $1
@@ -73,11 +68,9 @@ describe("DB Users", () => {
       const user = await createUser(fakeUserData);
       expect(user.password).toBeFalsy();
     });
-
   });
 
   describe("getUser({ username, password })", () => {
-
     it("returns the user when the password verifies", async () => {
       const fakeUserData = {
         username: "Nicole",
@@ -99,7 +92,7 @@ describe("DB Users", () => {
 
       const user = await getUser({
         username: "Issac",
-        password: "Bad Password"
+        password: "Bad Password",
       });
 
       expect(user).toBeFalsy();
@@ -114,22 +107,19 @@ describe("DB Users", () => {
       const user = await getUser(fakeUserData);
       expect(user.password).toBeFalsy();
     });
-
   });
   describe("getUserById", () => {
-
     it("Gets a user based on the user Id", async () => {
       const fakeUser = await createFakeUser("Jacob");
       const user = await getUserById(fakeUser.id);
       expect(user).toBeTruthy();
       expect(user.id).toBe(fakeUser.id);
     });
-    
+
     it("does not return the password", async () => {
       const fakeUser = await createFakeUser("Jonathan");
       const user = await getUserById(fakeUser.id);
       expect(user.password).toBeFalsy();
     });
-
   });
 });

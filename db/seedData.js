@@ -8,10 +8,10 @@ async function dropTables() {
     console.log("Dropping All Tables...");
 
     await client.query(
-      `DROP TABLE IF EXISTS users;
-      DROP TABLE IF EXISTS activities;
+      `DROP TABLE IF EXISTS routine_activities;
       DROP TABLE IF EXISTS routines;
-      DROP TABLE IF EXISTS routine_activities;
+      DROP TABLE IF EXISTS activities;
+      DROP TABLE IF EXISTS users;
       `
     );
     console.log("finished dropping tables");
@@ -41,7 +41,7 @@ async function createTables() {
     
     CREATE TABLE routines (
       id SERIAL PRIMARY KEY,
-      "creatorId" INTEGER FOREIGN KEY,
+      "creatorId" INTEGER REFERENCES users(id),
       "isPublic" BOOLEAN DEFAULT false,
       name VARCHAR(255) UNIQUE NOT NULL,
       goal TEXT NOT NULL
@@ -49,8 +49,8 @@ async function createTables() {
     
     CREATE TABLE routine_activities (
       id SERIAL PRIMARY KEY,
-      "routineId" INTEGER FOREIGN KEY,
-      "activityId" INTEGER FOREIGN KEY,
+      "routineId" INTEGER REFERENCES routines(id),
+      "activityId" INTEGER REFERENCES activities(id),
       duration INTEGER,
       count INTEGER,
       UNIQUE ("routineId", "activityId")
