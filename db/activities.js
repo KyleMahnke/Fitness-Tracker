@@ -1,59 +1,54 @@
-const client = require("./client")
+const client = require("./client");
 
 // database functions
 async function getAllActivities() {
-  const {
-    rows
-  } = await client.query(
-    `SELECT * FROM activities`
-  )
+  const { rows } = await client.query(`SELECT * FROM activities;`);
   return rows;
 }
 
 async function getActivityById(id) {
   const {
-    rows: [activities],
+    rows: [activity],
   } = await client.query(
-    `SELECT * FROM activities
-    WHERE id = $1`,
+    `SELECT *
+    FROM activities
+    WHERE id=$1;`,
     [id]
   );
-  return activities;
+  return activity;
 }
 
-async function getActivityByName(name) {
+async function getActivityByName(activityName) {
   const {
     rows: [activities],
   } = await client.query(
     `SELECT * FROM activities
-    WHERE name = $1`,
-    [name]
+    WHERE name=$1`,
+    [activityName]
   );
   return activities;
 }
 
-async function attachActivitiesToRoutines(routines) {
-}
+async function attachActivitiesToRoutines(routines) {}
 
 // select and return an array of all activities
 async function createActivity(activity) {
-//   const {name, description} = activity;
-//   const {
-//     rows: [newActivity],
-//   } = await client.query(
-//     `INSERT INTO actvities(name, description)
-//     VALUES($1, $2)
-//     CREATE UNIQUE INDEX activities ON activities(lower(name))
-//     RETURNING *;
-//     `, 
-//     [name, description]
-//   ); 
-//   return newActivity;  
-};
+  const { name, description } = activity;
+  const {
+    rows: [newActivity],
+  } = await client.query(
+    `INSERT INTO activities(name, description)
+      VALUES($1, $2)
+      RETURNING *;
+      `,
+    [name, description]
+  );
+  return newActivity;
+}
 
 // return the new activity
 async function updateActivity(activity) {
-  const {id, name, description} = activity;
+  const { name, description } = activity;
   const {
     rows: [updateActivity],
   } = await client.query(
@@ -64,7 +59,7 @@ async function updateActivity(activity) {
     [name, description]
   );
   return updateActivity;
-};
+}
 
 // don't try to update the id
 // do update the name and description
@@ -76,4 +71,4 @@ module.exports = {
   attachActivitiesToRoutines,
   createActivity,
   updateActivity,
-}
+};
