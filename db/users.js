@@ -20,25 +20,46 @@ const createUser = async (user) => {
     `,
     [username, hashedPassword]
   );
+  delete newUser.password;
   return newUser;
 };
 
-async function getUser({ username, password }) {
-  const user = await getUserByUserName(username);
-  const hashedPassword = user.password;
+const getUser = async ({ username, password }) => {
+  const user = await getUserByUsername(username);
+  if (!user) {
+    return;
+  }
+  console.log(user);
+  const doPasswordsMatch = await bcrypt.compare(password, user.password);
+  if (doPasswordsMatch) {
+    delete user.password;
+    return user;
+  }
+  return null;
+};
 
-  bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {
-    if (passwordsMatch) {
-      // return the user object (without the password)
-    } else {
-      throw SomeError;
-    }
-  });
-}
+const getUserById = async (id) => {
+  const {
+    rows: [user],
+  } = await client.query(
+    `SELECT id, username FROM users
+    WHERE id = $1`,
+    [id]
+  );
+  return user;
+};
 
-async function getUserById(userId) {}
+const getUserByUsername = async (username) => {
+  const {
+    rows: [user],
+  } = await client.query(
+    `SELECT * FROM users
+    WHERE username = $1`,
+    [username]
+  );
 
-async function getUserByUsername(userName) {}
+  return user;
+};
 
 module.exports = {
   createUser,
