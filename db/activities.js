@@ -3,11 +3,11 @@ const client = require("./client")
 // database functions
 async function getAllActivities() {
   const {
-    rows: [activities],
+    rows
   } = await client.query(
-    `SELECT id, name, description FROM activities`
+    `SELECT * FROM activities`
   )
-  return activities;
+  return rows;
 }
 
 async function getActivityById(id) {
@@ -36,35 +36,35 @@ async function attachActivitiesToRoutines(routines) {
 }
 
 // select and return an array of all activities
-// async function createActivity({ name, description }) {
+async function createActivity(activity) {
 //   const {name, description} = activity;
 //   const {
 //     rows: [newActivity],
 //   } = await client.query(
 //     `INSERT INTO actvities(name, description)
 //     VALUES($1, $2)
-//     CREATE UNIQUE INDEX activites ON activites(lower(name))
+//     CREATE UNIQUE INDEX activities ON activities(lower(name))
 //     RETURNING *;
 //     `, 
 //     [name, description]
 //   ); 
 //   return newActivity;  
-// };
+};
 
 // return the new activity
-// async function updateActivity({ id, ...fields }) {
-//   const {id, name, description} = activity;
-//   const {
-//     rows: [updateActivity],
-//   } = await client.query(
-//     `INSERT INTO activities(name, description)
-//     VALUES($1,$2)
-//     RETURNING *;
-//     `,
-//     [name, description]
-//   );
-//   return updateActivity;
-// };
+async function updateActivity(activity) {
+  const {id, name, description} = activity;
+  const {
+    rows: [updateActivity],
+  } = await client.query(
+    `INSERT INTO activities(name, description)
+    VALUES($1,$2)
+    RETURNING *;
+    `,
+    [name, description]
+  );
+  return updateActivity;
+};
 
 // don't try to update the id
 // do update the name and description
@@ -74,6 +74,6 @@ module.exports = {
   getActivityById,
   getActivityByName,
   attachActivitiesToRoutines,
-  // createActivity,
-  // updateActivity,
+  createActivity,
+  updateActivity,
 }
