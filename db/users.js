@@ -57,7 +57,7 @@ const getUserByUsername = async (username) => {
     WHERE username = $1`,
     [username]
   );
-
+//test
   return user;
 };
 
