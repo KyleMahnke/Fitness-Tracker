@@ -1,34 +1,59 @@
-const client = require('./client');
+const { getUserById } = require(".");
+const client = require("./client");
+const { attachActivitiesToRoutines } = require("./activities");
 
-async function getRoutineById(id){
+async function getRoutineById(id) {
+  const {
+    rows: [routine],
+  } = await client.query(
+    `SELECT *
+    FROM routines
+    WHERE id=$1`,
+    [id]
+  );
+  return routine;
 }
 
-async function getRoutinesWithoutActivities(){
+async function getRoutinesWithoutActivities() {
+  const { rows } = await client.query(`
+  SELECT id, "routineId", duration, count
+  FROM routines;`);
+  return rows;
 }
 
 async function getAllRoutines() {
+  const { rows } = await client.query(`
+  SELECT routines.*, users.username AS "creatorName"
+  FROM routines
+  JOIN users ON "creatorId" = users.id`);
+  console.log("ROWSSSSSSS:", rows);
+  // return rows;
+  return attachActivitiesToRoutines(rows);
 }
 
-async function getAllRoutinesByUser({username}) {
+async function getAllRoutinesByUser({ username }) {}
+
+async function getPublicRoutinesByUser({ username }) {}
+
+async function getAllPublicRoutines() {}
+
+async function getPublicRoutinesByActivity({ id }) {}
+
+async function createRoutine({ creatorId, isPublic, name, goal }) {
+  const {
+    rows: [newRoutine],
+  } = await client.query(
+    `INSERT INTO routines("creatorId", "isPublic", name, goal)
+    VALUES($1, $2, $3, $4)
+    RETURNING *;`,
+    [creatorId, isPublic, name, goal]
+  );
+  return newRoutine;
 }
 
-async function getPublicRoutinesByUser({username}) {
-}
+async function updateRoutine({ id, ...fields }) {}
 
-async function getAllPublicRoutines() {
-}
-
-async function getPublicRoutinesByActivity({id}) {
-}
-
-async function createRoutine({creatorId, isPublic, name, goal}) {
-}
-
-async function updateRoutine({id, ...fields}) {
-}
-
-async function destroyRoutine(id) {
-}
+async function destroyRoutine(id) {}
 
 module.exports = {
   getRoutineById,
@@ -41,4 +66,4 @@ module.exports = {
   createRoutine,
   updateRoutine,
   destroyRoutine,
-}
+};
