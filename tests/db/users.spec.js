@@ -43,9 +43,9 @@ describe("DB Users", () => {
       };
       const user = await createUser(fakeUserData);
 
-      const {
-        rows: [queriedUser],
-      } = await client.query(
+
+      const { rows: [queriedUser] } = await client.query(
+ main
         `
         SELECT * from users
         WHERE id = $1
