@@ -31,23 +31,69 @@ async function getActivityByName(activityName) {
   return activities;
 }
 
-async function attachActivitiesToRoutines(routines) {
-  const routinesToReturn = [...routines];
-  const routineInfo = routinesToReturn
-    .map((fieldName, index) => `$${index + 1}`)
-    .join(", ");
-  const routineIds = routinesToReturn.map(
-    (fieldName, index) => `$${index + 1}`
-  );
-  const { rows: activities } = await client.query(
-    `SELECT activities.*, routine_activities.count, routine_activities.duration, routine_activities.id AS "routineActivityId", routine_activities."routineId"
-    FROM activities
-    JOIN routine_activities ON "activityId" = activities.id
-    WHERE routine_activities."routineId" IN (${routineInfo})
-    `,
-    routineIds
-  );
+// async function attachActivitiesToRoutines(routines) {
+//   const routinesToReturn = [...routines];
+//   const routineInfo = routinesToReturn
+//     .map((fieldName, index) => `$${index + 1}`)
+//     .join(", ");
+//   const routineIds = routinesToReturn.map(
+//     (fieldName, index) => `$${index + 1}`
+//   );
+//   const { rows: activities } = await client.query(
+//     `SELECT activities.*, routine_activities.count, routine_activities.duration, routine_activities.id AS "routineActivityId", routine_activities."routineId"
+//     FROM activities
+//     JOIN routine_activities ON "activityId" = activities.id
+//     WHERE routine_activities."routineId" IN (${routineInfo})
+//     `,
+//     routineIds
+//   );
+// }
+
+const attachActivitiesToRoutines = async (rows) => {
+  const dedupedRoutine = {}
+
+  for (const row of rows) {
+      dedupedRoutine[row.id] = {
+        id: row.id,
+        creatorId: row.creatorId,
+        creatorName: row.creatorName,
+        isPublic: row.isPublic,
+        name: row.name,
+        goal: row.goal,
+        activities: [],
+      }
+  }
+  const routinesToReturn = [...rows];
+    const routineInfo = routinesToReturn
+      .map((fieldName, index) => `$${index + 1}`)
+      .join(", ");
+    const routineIds = routinesToReturn.map(
+      (fieldName) => fieldName.id
+    );
+    const { rows: activities } = await client.query(
+      `SELECT activities.*, routine_activities.count, routine_activities.duration, routine_activities.id AS "routineActivityId", routine_activities."routineId"
+      FROM activities
+      JOIN routine_activities ON "activityId" = activities.id
+      WHERE routine_activities."routineId" IN (${routineInfo})
+      `,
+      routineIds
+    );
+    for (const activity of activities) {
+      const routineId = activity.routineId
+      dedupedRoutine[routineId].activities.push(activity)
+    }
+    console.log("dedupedRoutines", JSON.stringify(dedupedRoutine,null,2))
+  const routine = Object.values(dedupedRoutine)
+  return routine;
 }
+
+const getActivityFromRow = (row) => {
+  return {
+    id: row.activity_id,
+    name: row.activity_name,
+  }
+}
+
 
 // select and return an array of all activities
 async function createActivity(activity) {
