@@ -1,7 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import {  Link, useHistory } from "react-router-dom";
 
-const NavBar = ({}) => {
+const NavBar = ({isLoggedIn, setIsLoggedIn}) => {
+  const history = useHistory()
+  const handleClick = () => {
+    localStorage.removeItem("token")
+    setIsLoggedIn(false)
+    history.push("/")
+  }
   return (
     <nav className="navbar">
       <h1 className="title">Riz, Kyle and Mark's Fitness Tracker!</h1>
@@ -10,13 +16,20 @@ const NavBar = ({}) => {
           Home
         </Link>
         <Link>All Routines</Link>
-        <Link>My Routines</Link>
         <Link>Activities</Link>
-        <Link>Login</Link>
+        {isLoggedIn ? (
+          <>
+            <Link>My Routines</Link>
+            <Link to = "/" onClick={handleClick} >Logout</Link>
+          </>
+        ) : (
+          <>
+        <Link to="/login">Login</Link>
         <Link to="/register" className="navLinks">
           Register
         </Link>
-        <Link>Logout</Link>
+          </>
+        )}
       </div>
     </nav>
   );

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
-const Register = () => {
+
+const Register = ({setIsLoggedIn}) => {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,10 +28,8 @@ const Register = () => {
         }),
       }
     );
-    // console.log(data);
     const data = await response.json();
-
-    window.localStorage.setitem("token", data.token);
+    window.localStorage.setItem("token", data.token);
 
     if (response.ok === true) {
       setIsLoggedIn(true);
