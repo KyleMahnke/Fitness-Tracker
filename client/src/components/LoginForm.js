@@ -9,7 +9,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
   const [successMessage, setSuccessMessage] = useState(null);
 
   const handleSubmit = async (event) => {
-    setErrorMessage("username or password incorrect");
     event.preventDefault();
 
     const response = await fetch(
@@ -26,9 +25,10 @@ const LoginForm = ({ setIsLoggedIn }) => {
       }
     );
     const data = await response.json();
+    console.log(data.token);
     window.localStorage.setItem("token", data.token);
 
-    if (response.ok === true) {
+    if (data.token) {
       setIsLoggedIn(true);
       setSuccessMessage("Welcome back!");
       setTimeout(() => {

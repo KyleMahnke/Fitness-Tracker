@@ -16,10 +16,10 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           Home
         </Link>
         <Link to="/routines">All Routines</Link>
-        <Link>Activities</Link>
+        <Link to="/activities">Activities</Link>
         {isLoggedIn ? (
           <>
-            <Link>My Routines</Link>
+            <Link to="/myroutines">My Routines</Link>
             <Link to="/" onClick={handleClick}>
               Logout
             </Link>

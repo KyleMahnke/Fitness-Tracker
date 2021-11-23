@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Link from "react-router-dom";
 
 const Routines = () => {
   const [routines, setRoutines] = useState([]);
@@ -16,7 +15,7 @@ const Routines = () => {
       );
 
       const data = await response.json();
-      console.log(data);
+      console.log("ROUTINES:", data);
       setRoutines(data);
     };
     getAllRoutines();
@@ -30,7 +29,21 @@ const Routines = () => {
           <h3>Goal: {routine.goal}</h3>
           <h3>Creator Name: {routine.creatorName}</h3>
           {routine.activities.length ? (
-            <p>Activities: {routine.activities.name}</p>
+            <>
+              <h4>Activities:</h4>
+              <ul>
+                {routine.activities.map((activity) => (
+                  <>
+                    <li>
+                      {activity.name}: {activity.description}
+                    </li>
+                    <li>Number of reps: {activity.count}</li>
+                    <li>Duration: {activity.duration}</li>
+                    <br />
+                  </>
+                ))}
+              </ul>
+            </>
           ) : (
             <p>Activities: none</p>
           )}

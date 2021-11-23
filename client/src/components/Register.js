@@ -13,31 +13,33 @@ const Register = ({ setIsLoggedIn }) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");
-    }
-    const response = await fetch(
-      `http://fitnesstrac-kr.herokuapp.com/api/users/register`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      }
-    );
-    const data = await response.json();
-    window.localStorage.setItem("token", data.token);
-
-    if (response.ok === true) {
-      setIsLoggedIn(true);
-      setSuccessMessage("Thanks for registering!");
-      setTimeout(() => {
-        history.push("/");
-      }, 1500);
     } else {
-      setErrorMessage(data.message);
+      const response = await fetch(
+        `http://fitnesstrac-kr.herokuapp.com/api/users/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      window.localStorage.setItem("token", data.token);
+
+      if (data.token) {
+        setIsLoggedIn(true);
+        setSuccessMessage("Thanks for registering!");
+        setTimeout(() => {
+          history.push("/");
+        }, 1500);
+      } else {
+        setErrorMessage(data.message);
+      }
     }
   };
 

@@ -5,9 +5,13 @@ import NavBar from "./components/NavBar";
 import Register from "./components/Register";
 import LoginForm from "./components/LoginForm";
 import Routines from "./components/Routines";
+import Activities from "./components/Activities";
+import NewActivity from "./components/NewActivity";
+import MyRoutines from "./components/MyRoutines";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const TOKEN = window.localStorage.getItem("token");
@@ -22,7 +26,9 @@ const App = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
+      console.log(data.username);
+      setUsername(data.username);
+
       if (data.id) {
         setIsLoggedIn(true);
       }
@@ -45,7 +51,16 @@ const App = () => {
               <LoginForm setIsLoggedIn={setIsLoggedIn} />
             </Route>
             <Route path="/routines">
-              <Routines setIsLoggedIn={setIsLoggedIn} />
+              <Routines />
+            </Route>
+            <Route path="/myroutines">
+              <MyRoutines username={username} />
+            </Route>
+            <Route path="/activities">
+              <Activities isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route path="/newactivity">
+              <NewActivity isLoggedIn={isLoggedIn} />
             </Route>
           </Switch>
         </div>
