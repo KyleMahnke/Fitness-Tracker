@@ -1,10 +1,10 @@
-
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Register from "./components/Register";
 import LoginForm from "./components/LoginForm";
+import Routines from "./components/Routines";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +22,7 @@ const App = () => {
         }
       );
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       if (data.id) {
         setIsLoggedIn(true);
       }
@@ -32,17 +32,20 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <NavBar isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
+        <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <div className="content">
           <Switch>
             <Route exact path="/">
               <Home />
             </Route>
             <Route path="/register">
-              <Register setIsLoggedIn = {setIsLoggedIn} />
+              <Register setIsLoggedIn={setIsLoggedIn} />
             </Route>
             <Route path="/login">
-              <LoginForm setIsLoggedIn = {setIsLoggedIn} />
+              <LoginForm setIsLoggedIn={setIsLoggedIn} />
+            </Route>
+            <Route path="/routines">
+              <Routines setIsLoggedIn={setIsLoggedIn} />
             </Route>
           </Switch>
         </div>
