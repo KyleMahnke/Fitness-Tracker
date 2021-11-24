@@ -51,6 +51,7 @@ const ActivitiesToRoutines = ({ routineId }) => {
   return (
     <>
       <h1>Attaching activities to your routine</h1>
+      <h3>Select an activity:</h3>
       <form>
         <select
           value={activities}
@@ -62,7 +63,7 @@ const ActivitiesToRoutines = ({ routineId }) => {
         </select>
         <br />
         <label>
-          Count:
+          Desired Count:
           <input
             type="text"
             required
@@ -73,7 +74,7 @@ const ActivitiesToRoutines = ({ routineId }) => {
         </label>
         <br />
         <label>
-          Duration:
+          Desired Duration:
           <input
             type="text"
             required
@@ -82,6 +83,7 @@ const ActivitiesToRoutines = ({ routineId }) => {
             onChange={(e) => setDuration(e.target.value)}
           />
         </label>
+        <br />
         <button type="submit">Add Activity</button>
       </form>
     </>
