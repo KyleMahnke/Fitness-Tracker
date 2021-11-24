@@ -43,6 +43,7 @@ const NewRoutine = ({ isLoggedIn }) => {
           <form className="createPostForm" onSubmit={handleSubmit}>
             <label>
               Routine Name:
+              <br />
               <input
                 type="text"
                 required
@@ -54,6 +55,7 @@ const NewRoutine = ({ isLoggedIn }) => {
             <br />
             <label>
               Goal:
+              <br />
               <input
                 type="text"
                 required
@@ -70,6 +72,8 @@ const NewRoutine = ({ isLoggedIn }) => {
               name="ispublic"
               onChange={() => setIsPublic(!isPublic)}
             ></input>
+            <br />
+            <br />
             <input type="submit" value="Create Routine" />
           </form>
         </>

@@ -41,10 +41,12 @@ const NewActivity = ({ isLoggedIn }) => {
           <form className="createPostForm" onSubmit={handleSubmit}>
             <label>
               Activity Name:
+              <br />
               <input
                 type="text"
                 required
                 name="name"
+                placeholder="add activity name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -52,14 +54,17 @@ const NewActivity = ({ isLoggedIn }) => {
             <br />
             <label>
               Description:
+              <br />
               <input
                 type="text"
                 required
                 name="description"
+                placeholder="add description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </label>
+            <br />
             <br />
             <input type="submit" value="Create Activity" />
           </form>

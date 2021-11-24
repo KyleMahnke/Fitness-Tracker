@@ -50,9 +50,10 @@ const ActivitiesToRoutines = ({ routineId }) => {
 
   return (
     <>
-      <h1>Attaching activities to your routine</h1>
-      <h3>Select an activity:</h3>
+      <h1>Let's attach activities to your routine</h1>
+
       <form>
+        <h3>Select an activity:</h3>
         <select
           value={activities}
           onChange={(e) => setActivityId(e.target.value)}
@@ -62,27 +63,34 @@ const ActivitiesToRoutines = ({ routineId }) => {
           ))}
         </select>
         <br />
+        <br />
         <label>
-          Desired Count:
+          Number of Reps:
+          <br />
           <input
             type="text"
             required
             name="count"
             value={count}
+            placeholder="set desired count"
             onChange={(e) => setCount(e.target.value)}
           />
         </label>
         <br />
+
         <label>
-          Desired Duration:
+          Duration:
+          <br />
           <input
             type="text"
             required
             name="duration"
             value={duration}
+            placeholder="set desired duration"
             onChange={(e) => setDuration(e.target.value)}
           />
         </label>
+        <br />
         <br />
         <button type="submit">Add Activity</button>
       </form>
