@@ -9,10 +9,12 @@ import Activities from "./components/Activities";
 import NewActivity from "./components/NewActivity";
 import MyRoutines from "./components/MyRoutines";
 import NewRoutine from "./components/NewRoutine";
+import ActivitiesToRoutines from "./components/ActivitiesToRoutines";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [routineId, setRoutineId] = useState("");
 
   useEffect(() => {
     const TOKEN = window.localStorage.getItem("token");
@@ -55,7 +57,7 @@ const App = () => {
               <Routines />
             </Route>
             <Route path="/myroutines">
-              <MyRoutines username={username} />
+              <MyRoutines username={username} setRoutineId = {setRoutineId} />
             </Route>
             <Route path="/activities">
               <Activities isLoggedIn={isLoggedIn} />
@@ -65,6 +67,9 @@ const App = () => {
             </Route>
             <Route path="/createroutine">
               <NewRoutine isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route path="/addactivities">
+              <ActivitiesToRoutines isLoggedIn={isLoggedIn} routineId = {routineId} />
             </Route>
           </Switch>
         </div>

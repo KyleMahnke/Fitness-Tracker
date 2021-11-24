@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const token = localStorage.getItem("token");
 
-const MyRoutines = ({ username }) => {
+const MyRoutines = ({ username, setRoutineId }) => {
   const [routines, setRoutines] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   console.log(username);
@@ -84,6 +84,14 @@ const MyRoutines = ({ username }) => {
           <h2>Routine: {routine.name}</h2>
           <h3>Goal: {routine.goal}</h3>
           <h3>Creator Name: {routine.creatorName}</h3>
+          {console.log(routine.id)}
+          <Link to="/addactivities" >
+          <button onClick= {()=> setRoutineId(routine.id)}
+            className="addRoutine"
+          >
+            Add Activities
+          </button>
+          </Link>
           <button
             className="addRoutine"
             onClick={() => handleDelete(routine.id)}
@@ -107,7 +115,7 @@ const MyRoutines = ({ username }) => {
               </ul>
             </>
           ) : (
-            <p>Activities: none</p>
+            null
           )}
         </div>
       ))}
