@@ -55,7 +55,7 @@ const Register = ({ setIsLoggedIn }) => {
             required
             minLength="4"
             name="name"
-            placeholder="USERNAME"
+            placeholder="CREATE USERNAME"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -67,7 +67,7 @@ const Register = ({ setIsLoggedIn }) => {
             required
             minLength="6"
             name="password"
-            placeholder="PASSWORD"
+            placeholder="CREATE PASSWORD"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -85,7 +85,7 @@ const Register = ({ setIsLoggedIn }) => {
           />
         </label>
         <br />
-        <input type="submit" value="Register" />
+        <input type="submit" value="Register!" />
       </form>
     </>
   );

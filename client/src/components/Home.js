@@ -7,7 +7,7 @@ const Home = () => {
       <div className="homepage">
         <h1 className="hometitle">Let's get fit!</h1>
         <h3 className="hometitle">Burning off those Thanksgiving calories!</h3>
-        <Link to="/posts">
+        <Link to="/routines">
           <div className="buttondiv">
             <button className="thirsty">Let's twerk.</button>
           </div>

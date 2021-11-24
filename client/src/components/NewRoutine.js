@@ -1,18 +1,19 @@
 import { useHistory } from "react-router";
 import React, { useState } from "react";
 
-const NewActivity = ({ isLoggedIn }) => {
+const NewRoutine = ({ isLoggedIn }) => {
   const history = useHistory();
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [goal, setGoal] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const TOKEN = window.localStorage.getItem("token");
     const response = await fetch(
-      `http://fitnesstrac-kr.herokuapp.com/api/activities`,
+      `http://fitnesstrac-kr.herokuapp.com/api/routines`,
       {
         method: "POST",
         headers: {
@@ -21,14 +22,15 @@ const NewActivity = ({ isLoggedIn }) => {
         },
         body: JSON.stringify({
           name,
-          description,
+          goal,
+          isPublic,
         }),
       }
     );
     const data = await response.json();
     console.log(data);
     if (data.id) {
-      history.push("/activities");
+      history.push("/myroutines");
     }
   };
 
@@ -36,11 +38,11 @@ const NewActivity = ({ isLoggedIn }) => {
     <>
       {isLoggedIn ? (
         <>
-          <h2>Create New Activity</h2>
+          <h2>Create your new routine, bitch!</h2>
           {successMessage ? <h4>{successMessage}</h4> : null}
           <form className="createPostForm" onSubmit={handleSubmit}>
             <label>
-              Activity Name:
+              Routine Name:
               <input
                 type="text"
                 required
@@ -51,24 +53,31 @@ const NewActivity = ({ isLoggedIn }) => {
             </label>
             <br />
             <label>
-              Description:
+              Goal:
               <input
                 type="text"
                 required
-                name="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name="goal"
+                value={goal}
+                onChange={(e) => setGoal(e.target.value)}
               />
             </label>
             <br />
-            <input type="submit" value="Create Activity" />
+            <label>Is public?</label>
+            <input
+              type="checkbox"
+              checked={isPublic}
+              name="ispublic"
+              onChange={() => setIsPublic(!isPublic)}
+            ></input>
+            <input type="submit" value="Create Routine" />
           </form>
         </>
       ) : (
-        <h1>Please log in to create a new activity</h1>
+        <h1>Please log in to create a new routine.</h1>
       )}
     </>
   );
 };
 
-export default NewActivity;
+export default NewRoutine;

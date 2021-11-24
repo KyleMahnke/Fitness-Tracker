@@ -8,6 +8,7 @@ import Routines from "./components/Routines";
 import Activities from "./components/Activities";
 import NewActivity from "./components/NewActivity";
 import MyRoutines from "./components/MyRoutines";
+import NewRoutine from "./components/NewRoutine";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,6 +62,9 @@ const App = () => {
             </Route>
             <Route path="/newactivity">
               <NewActivity isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route path="/createroutine">
+              <NewRoutine isLoggedIn={isLoggedIn} />
             </Route>
           </Switch>
         </div>

@@ -1,0 +1,17 @@
+.navbar {
+  /* padding: 0;
+  display: inline-block;
+  justify-content: space-around;
+  border: 1px solid white; */
+  background: none;
+  /* float: right; */
+  font-size: 1.125em;
+  margin-right: 5%;
+  /* text-align: right; */
+
+  justify-content: space-around;
+}
+
+.navbar:hover {
+  color: green;
+}

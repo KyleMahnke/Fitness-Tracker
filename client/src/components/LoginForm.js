@@ -31,9 +31,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
     if (data.token) {
       setIsLoggedIn(true);
       setSuccessMessage("Welcome back!");
-      setTimeout(() => {
-        history.push("/");
-      }, 1500);
+
+      history.push("/");
     } else {
       setErrorMessage(data.message);
     }
@@ -41,7 +40,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
   return (
     <>
-      <h2>Login to Fitness Trkr</h2>
+      <h2>Welcome Back!</h2>
+      <h2>Log into Fitness Trkr:</h2>
       {errorMessage ? <h4>{errorMessage}</h4> : null}
       {successMessage ? <h4>{successMessage}</h4> : null}
       <form className="loginForm" onSubmit={handleSubmit}>
@@ -49,26 +49,27 @@ const LoginForm = ({ setIsLoggedIn }) => {
           <input
             type="text"
             name="name"
-            placeholder="ENTER USERNAME"
+            placeholder="USERNAME"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
         <br />
+
         <label>
           <input
             type="text"
             name="password"
-            placeholder="ENTER PASSWORD"
+            placeholder="PASSWORD"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <br />
-        <input type="submit" value="Login" />
+        <input type="submit" value="Log In" />
       </form>
       <h3>
-        Not a member yet? <NavLink to="/register">Register today.</NavLink>
+        Not a member yet? <NavLink to="/register">Register today!</NavLink>
       </h3>
     </>
   );
