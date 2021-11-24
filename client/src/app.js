@@ -29,7 +29,6 @@ const App = () => {
         }
       );
       const data = await response.json();
-      console.log(data.username);
       setUsername(data.username);
 
       if (data.id) {
@@ -57,7 +56,7 @@ const App = () => {
               <Routines />
             </Route>
             <Route path="/myroutines">
-              <MyRoutines username={username} setRoutineId = {setRoutineId} />
+              <MyRoutines username={username} setRoutineId={setRoutineId} />
             </Route>
             <Route path="/activities">
               <Activities isLoggedIn={isLoggedIn} />
@@ -69,7 +68,10 @@ const App = () => {
               <NewRoutine isLoggedIn={isLoggedIn} />
             </Route>
             <Route path="/addactivities">
-              <ActivitiesToRoutines isLoggedIn={isLoggedIn} routineId = {routineId} />
+              <ActivitiesToRoutines
+                isLoggedIn={isLoggedIn}
+                routineId={routineId}
+              />
             </Route>
           </Switch>
         </div>
