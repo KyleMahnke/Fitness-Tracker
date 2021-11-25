@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 const ActivitiesToRoutines = ({ routineId }) => {
   const [activities, setActivities] = useState([]);
   const [activityId, setActivityId] = useState([]);
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     const getAllActivities = async () => {
@@ -18,7 +20,6 @@ const ActivitiesToRoutines = ({ routineId }) => {
       );
 
       const data = await response.json();
-      console.log(data);
       setActivities(data);
     };
     getAllActivities();
@@ -46,13 +47,14 @@ const ActivitiesToRoutines = ({ routineId }) => {
     );
     const data = await response.json();
     console.log(activityId);
+    history.push("/myroutines");
   };
 
   return (
     <>
       <h1>Let's attach activities to your routine</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <h3>Select an activity:</h3>
         <select
           value={activities}

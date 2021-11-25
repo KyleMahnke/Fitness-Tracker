@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const token = localStorage.getItem("token");
 
-const MyRoutines = ({ username, setRoutineId }) => {
+const MyRoutines = ({
+  username,
+  setRoutineId,
+  routineActivityId,
+  setRoutineActivityId,
+}) => {
   const [routines, setRoutines] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(username);
+
   useEffect(() => {
     const getMyRoutines = async () => {
       const response = await fetch(
@@ -35,7 +40,7 @@ const MyRoutines = ({ username, setRoutineId }) => {
     getMyRoutines();
   }, [username]);
 
-  const handleDelete = async (routineId) => {
+  const handleDeleteRoutine = async (routineId) => {
     const response = await fetch(
       `http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}`,
       {
@@ -72,6 +77,21 @@ const MyRoutines = ({ username, setRoutineId }) => {
     }
   };
 
+  // const handleDeleteActivity = async (routineActivityId) => {
+  //   const response = await fetch(
+  //     `http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`,
+  //     {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   );
+  //   const data = await response.json();
+  //   console.log(data);
+  // };
+
   return (
     <>
       {errorMessage ? <p>{errorMessage}</p> : null}
@@ -85,20 +105,6 @@ const MyRoutines = ({ username, setRoutineId }) => {
           <h3>Goal: {routine.goal}</h3>
           <h3>Creator Name: {routine.creatorName}</h3>
           {console.log(routine.id)}
-          <Link to="/addactivities">
-            <button
-              onClick={() => setRoutineId(routine.id)}
-              className="addRoutine"
-            >
-              Add Activities
-            </button>
-          </Link>
-          <button
-            className="addRoutine"
-            onClick={() => handleDelete(routine.id)}
-          >
-            Delete
-          </button>
           {routine.activities.length ? (
             <>
               <h4>Activities:</h4>
@@ -110,12 +116,43 @@ const MyRoutines = ({ username, setRoutineId }) => {
                     </li>
                     <li>Number of reps: {activity.count}</li>
                     <li>Duration: {activity.duration}</li>
+                    <Link to="/editactivity">
+                      <button
+                        onClick={() =>
+                          setRoutineActivityId(activity.routineActivityId)
+                        }
+                      >
+                        Edit Activities
+                      </button>
+                    </Link>
+                    <Link>
+                      <button>
+                        {/* THIS GOES INSIDE BUTTON TAG RIGHT THURR ^^ onClick={handleDeleteActivity(routineActivityId)} */}
+                        Delete Activity from Routine - not working yet
+                      </button>
+                    </Link>
                     <br />
                   </>
                 ))}
               </ul>
             </>
           ) : null}
+          <Link to="/addactivities">
+            <button onClick={() => setRoutineId(routine.id)}>
+              Add Activities
+            </button>
+          </Link>
+          <Link to="/editroutine">
+            <button onClick={() => setRoutineId(routine.id)}>
+              Edit Routine Name/Goal
+            </button>
+          </Link>
+          <button
+            className="addRoutine"
+            onClick={() => handleDeleteRoutine(routine.id)}
+          >
+            Delete Routine
+          </button>
         </div>
       ))}
     </>

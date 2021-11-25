@@ -5,7 +5,6 @@ const NewRoutine = ({ isLoggedIn }) => {
   const history = useHistory();
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const [isPublic, setIsPublic] = useState(true);
 
   const handleSubmit = async (event) => {
@@ -39,7 +38,6 @@ const NewRoutine = ({ isLoggedIn }) => {
       {isLoggedIn ? (
         <>
           <h2>Create your new routine, bitch!</h2>
-          {successMessage ? <h4>{successMessage}</h4> : null}
           <form className="createPostForm" onSubmit={handleSubmit}>
             <label>
               Routine Name:
