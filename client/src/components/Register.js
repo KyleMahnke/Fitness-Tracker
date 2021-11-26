@@ -63,7 +63,7 @@ const Register = ({ setIsLoggedIn }) => {
         <br />
         <label>
           <input
-            type="text"
+            type="password"
             required
             minLength="6"
             name="password"
@@ -75,7 +75,7 @@ const Register = ({ setIsLoggedIn }) => {
         <br />
         <label>
           <input
-            type="text"
+            type="password"
             required
             minLength="6"
             name="password"

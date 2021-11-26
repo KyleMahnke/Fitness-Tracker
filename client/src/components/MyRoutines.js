@@ -76,26 +76,27 @@ const MyRoutines = ({
       setRoutines(data2);
     }
   };
-
-  // const handleDeleteActivity = async (routineActivityId) => {
-  //   const response = await fetch(
-  //     `http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   const data = await response.json();
-  //   console.log(data);
-  // };
+  
+// handleDeleteActivity not working correctly. Gives auth error if hardcoded routineActivityId. 
+  const handleDeleteActivity = async (routineActivityId) => {
+    const response = await fetch(
+      `http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
 
   return (
     <>
       {errorMessage ? <p>{errorMessage}</p> : null}
-      <h1>These are my routines, bitch</h1>
+      <h1>These are my routines, bruhh</h1>
       <Link to="/createroutine">
         <button>Create New Routine</button>
       </Link>
@@ -126,7 +127,7 @@ const MyRoutines = ({
                       </button>
                     </Link>
                     <Link>
-                      <button>
+                      <button onClick={handleDeleteActivity(routineActivityId)}>
                         {/* THIS GOES INSIDE BUTTON TAG RIGHT THURR ^^ onClick={handleDeleteActivity(routineActivityId)} */}
                         Delete Activity from Routine - not working yet
                       </button>

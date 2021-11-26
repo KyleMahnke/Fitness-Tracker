@@ -37,7 +37,7 @@ const NewRoutine = ({ isLoggedIn }) => {
     <>
       {isLoggedIn ? (
         <>
-          <h2>Create your new routine, bitch!</h2>
+          <h2>Create your new routine!</h2>
           <form className="createPostForm" onSubmit={handleSubmit}>
             <label>
               Routine Name:

@@ -58,7 +58,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
         <label>
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="PASSWORD"
             value={password}
