@@ -97,7 +97,7 @@ const MyRoutines = ({
     <>
       <div className="myRoutines">
         {errorMessage ? <p>{errorMessage}</p> : null}
-        <h1>These are my routines, bruhh.</h1>
+        <h1 className="routinesTitle">These are my routines, bruhh.</h1>
         <Link to="/createroutine">
           <button className="createNewRoutine">Create New Routine</button>
         </Link>
@@ -128,14 +128,15 @@ const MyRoutines = ({
                         </button>
                       </Link>
                       {/* deletes the activity if you hard-refresh the page after clicking the delete button */}
-                      <button
-                        onClick={() =>
-                          handleDeleteActivity(activity.routineActivityId)
-                        }
-                      >
-                        Delete Activity from Routine - not working yet
-                      </button>
-
+                      <Link>
+                        <button
+                          onClick={() =>
+                            handleDeleteActivity(activity.routineActivityId)
+                          }
+                        >
+                          Delete Activity from Routine - not working yet
+                        </button>
+                      </Link>
                       <br />
                     </>
                   ))}

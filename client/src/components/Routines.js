@@ -27,7 +27,7 @@ const Routines = () => {
   return (
     <>
       <div className="allRoutines">
-        <h1>All Routines</h1>
+        <h1 className="allRoutinesTitle">All Routines</h1>
 
         {routines.map((routine) => (
           <div className="routineInfo">

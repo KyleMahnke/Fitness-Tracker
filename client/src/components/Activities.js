@@ -25,7 +25,7 @@ const Activities = ({ isLoggedIn }) => {
   return (
     <>
       <div className="allActivities">
-        <h1>Activites!!!!!!</h1>
+        <h1 className="activitiesTitle">Activites!!!!!!</h1>
         {isLoggedIn ? (
           <Link to="/newactivity">
             <button className="createNewActivity" type="submit">

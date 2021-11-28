@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 
 const EditActivity = ({ routineActivityId }) => {
+  const history = useHistory();
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
-  const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

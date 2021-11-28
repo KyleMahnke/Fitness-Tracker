@@ -69,7 +69,7 @@ body {
   color: rgb(108, 27, 184);
 }
 
-.links :hover {
+#links :hover {
   color: yellow;
 }
 
@@ -156,7 +156,10 @@ body {
 }
 
 .createActivityPage,
-.createRoutinePage {
+.createRoutinePage,
+.addActivity,
+.editRoutine,
+.editActivity {
   /* display: flex;
   flex-direction: column; */
   position: relative;
@@ -171,4 +174,23 @@ body {
   border-radius: 10px;
   padding-bottom: 40px;
   padding-top: 30px;
+}
+
+.routinesTitle,
+.activitiesTitle,
+.allRoutinesTitle {
+  text-align: center;
+}
+
+.createNewRoutine,
+.createNewActivity {
+  margin-bottom: 15px;
+  font-size: 18px;
+  width: 200px;
+  height: 35px;
+  text-align: center;
+  margin-inline: auto;
+  display: block;
+  text-align: center;
+  padding-bottom: 5px;
 }
