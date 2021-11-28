@@ -6,6 +6,7 @@ const NewActivity = ({ isLoggedIn }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,6 +30,8 @@ const NewActivity = ({ isLoggedIn }) => {
     console.log(data);
     if (data.id) {
       history.push("/activities");
+    } else {
+      setErrorMessage("Oops! Activity already exists!");
     }
   };
 
@@ -38,6 +41,7 @@ const NewActivity = ({ isLoggedIn }) => {
         {isLoggedIn ? (
           <>
             <h2>Create New Activity</h2>
+            {errorMessage ? <h4>{errorMessage}</h4> : null}
             {successMessage ? <h4>{successMessage}</h4> : null}
             <form className="createPostForm" onSubmit={handleSubmit}>
               <label>

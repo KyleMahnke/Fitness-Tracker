@@ -121,20 +121,21 @@ const MyRoutines = ({
                       <Link to="/editactivity">
                         <button
                           onClick={() =>
-                            setRoutineActivityId(activity.routineActivityId)
+                            setRoutineActivityId(routineActivityId)
                           }
                         >
                           Edit Activities
                         </button>
                       </Link>
-                      <Link>
-                        <button
-                          onClick={handleDeleteActivity(routineActivityId)}
-                        >
-                          {/* THIS GOES INSIDE BUTTON TAG RIGHT THURR ^^ onClick={handleDeleteActivity(routineActivityId)} */}
-                          Delete Activity from Routine - not working yet
-                        </button>
-                      </Link>
+                      {/* deletes the activity if you hard-refresh the page after clicking the delete button */}
+                      <button
+                        onClick={() =>
+                          handleDeleteActivity(activity.routineActivityId)
+                        }
+                      >
+                        Delete Activity from Routine - not working yet
+                      </button>
+
                       <br />
                     </>
                   ))}
