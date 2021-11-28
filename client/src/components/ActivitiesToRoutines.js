@@ -52,50 +52,51 @@ const ActivitiesToRoutines = ({ routineId }) => {
 
   return (
     <>
-      <h1>Let's attach activities to your routine</h1>
+      <div className="addActivity">
+        <h1>Let's attach activities to your routine</h1>
 
-      <form onSubmit={handleSubmit}>
-        <h3>Select an activity:</h3>
-        <select
-          value={activities}
-          onChange={(e) => setActivityId(e.target.value)}
-        >
-          {activities.map((activity) => (
-            <option value={activity.id}>{activity.name}</option>
-          ))}
-        </select>
-        <br />
-        <br />
-        <label>
-          Number of Reps:
+        <form onSubmit={handleSubmit}>
+          <h3>Select an activity:</h3>
+          <select
+            value={activities}
+            onChange={(e) => setActivityId(e.target.value)}
+          >
+            {activities.map((activity) => (
+              <option value={activity.id}>{activity.name}</option>
+            ))}
+          </select>
           <br />
-          <input
-            type="text"
-            required
-            name="count"
-            value={count}
-            placeholder="set desired count"
-            onChange={(e) => setCount(e.target.value)}
-          />
-        </label>
-        <br />
-
-        <label>
-          Duration:
           <br />
-          <input
-            type="text"
-            required
-            name="duration"
-            value={duration}
-            placeholder="set desired duration"
-            onChange={(e) => setDuration(e.target.value)}
-          />
-        </label>
-        <br />
-        <br />
-        <button type="submit">Add Activity</button>
-      </form>
+          <label>
+            Number of Reps:
+            <br />
+            <input
+              type="text"
+              required
+              name="count"
+              value={count}
+              placeholder="set desired count"
+              onChange={(e) => setCount(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Duration:
+            <br />
+            <input
+              type="text"
+              required
+              name="duration"
+              value={duration}
+              placeholder="set desired duration"
+              onChange={(e) => setDuration(e.target.value)}
+            />
+          </label>
+          <br />
+          {/* <button type="submit">Add Activity</button> */}
+          <input type="submit" value="Add Activity" />
+        </form>
+      </div>
     </>
   );
 };

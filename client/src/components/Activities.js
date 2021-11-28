@@ -24,18 +24,22 @@ const Activities = ({ isLoggedIn }) => {
 
   return (
     <>
-      <h1>Activites!!!!!!</h1>
-      {isLoggedIn ? (
-        <Link to="/newactivity">
-          <button type="submit">Create New Activity</button>
-        </Link>
-      ) : null}
-      {activities.map((activity) => (
-        <div>
-          <h2>{activity.name}</h2>
-          <p>{activity.description}</p>
-        </div>
-      ))}
+      <div className="allActivities">
+        <h1>Activites!!!!!!</h1>
+        {isLoggedIn ? (
+          <Link to="/newactivity">
+            <button className="createNewActivity" type="submit">
+              Create New Activity
+            </button>
+          </Link>
+        ) : null}
+        {activities.map((activity) => (
+          <div className="activitiesInfo">
+            <h2>{activity.name}</h2>
+            <p>{activity.description}</p>
+          </div>
+        ))}
+      </div>
     </>
   );
 };

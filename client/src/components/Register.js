@@ -45,48 +45,50 @@ const Register = ({ setIsLoggedIn }) => {
 
   return (
     <>
-      <h2>Register for our Fitness App</h2>
-      {errorMessage ? <h4>{errorMessage}</h4> : null}
-      {successMessage ? <h4>{successMessage}</h4> : null}
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="text"
-            required
-            minLength="4"
-            name="name"
-            placeholder="CREATE USERNAME"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          <input
-            type="password"
-            required
-            minLength="6"
-            name="password"
-            placeholder="CREATE PASSWORD"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          <input
-            type="password"
-            required
-            minLength="6"
-            name="password"
-            placeholder="CONFIRM PASSWORD"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <input type="submit" value="Register!" />
-      </form>
+      <div className="register">
+        <h2>Register for our Fitness App</h2>
+        {errorMessage ? <h4>{errorMessage}</h4> : null}
+        {successMessage ? <h4>{successMessage}</h4> : null}
+        <form className="loginForm" onSubmit={handleSubmit}>
+          <label>
+            <input
+              type="text"
+              required
+              minLength="4"
+              name="name"
+              placeholder="CREATE USERNAME"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              type="password"
+              required
+              minLength="6"
+              name="password"
+              placeholder="CREATE PASSWORD"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              type="password"
+              required
+              minLength="6"
+              name="password"
+              placeholder="CONFIRM PASSWORD"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </label>
+          <br />
+          <input type="submit" value="Register!" />
+        </form>
+      </div>
     </>
   );
 };

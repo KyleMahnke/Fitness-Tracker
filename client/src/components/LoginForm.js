@@ -40,37 +40,39 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
   return (
     <>
-      <h2>Welcome Back!</h2>
-      <h2>Log into Fitness Trkr:</h2>
-      {errorMessage ? <h4>{errorMessage}</h4> : null}
-      {successMessage ? <h4>{successMessage}</h4> : null}
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="text"
-            name="name"
-            placeholder="USERNAME"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br />
+      <div className="loginPage">
+        <h2>Welcome Back!</h2>
+        <h2>Log into Fitness Trkr:</h2>
+        {errorMessage ? <h4>{errorMessage}</h4> : null}
+        {successMessage ? <h4>{successMessage}</h4> : null}
+        <form className="loginForm" onSubmit={handleSubmit}>
+          <label>
+            <input
+              type="text"
+              name="name"
+              placeholder="USERNAME"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <br />
 
-        <label>
-          <input
-            type="password"
-            name="password"
-            placeholder="PASSWORD"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <input type="submit" value="Log In" />
-      </form>
-      <h3>
-        Not a member yet? <NavLink to="/register">Register today!</NavLink>
-      </h3>
+          <label>
+            <input
+              type="password"
+              name="password"
+              placeholder="PASSWORD"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <br />
+          <input type="submit" value="Log In" />
+        </form>
+        <h3>
+          Not a member yet? <NavLink to="/register">Register today!</NavLink>
+        </h3>
+      </div>
     </>
   );
 };

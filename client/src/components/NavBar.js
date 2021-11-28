@@ -10,24 +10,32 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   };
   return (
     <nav className="navbar">
-      <h1 className="title">Riz, Kyle and Mark's Fitness Tracker!</h1>
+      <h1 className="title">Riz, Kyle, & Mark's Fitness Tracker!</h1>
       <div className="links">
-        <Link to="/" className="navLinks">
+        <Link className="navLinks" to="/">
           Home
         </Link>
-        <Link to="/routines">All Routines</Link>
-        <Link to="/activities">Activities</Link>
+        <Link className="navLinks" to="/routines">
+          All Routines
+        </Link>
+        <Link className="navLinks" to="/activities">
+          Activities
+        </Link>
         {isLoggedIn ? (
           <>
-            <Link to="/myroutines">My Routines</Link>
-            <Link to="/" onClick={handleClick}>
+            <Link className="navLinks" to="/myroutines">
+              My Routines
+            </Link>
+            <Link className="navLinks" to="/" onClick={handleClick}>
               Logout
             </Link>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register" className="navLinks">
+            <Link className="navLinks" to="/login">
+              Login
+            </Link>
+            <Link className="navLinks" to="/register" className="navLinks">
               Register
             </Link>
           </>

@@ -33,42 +33,47 @@ const EditRoutine = ({ routineId }) => {
 
   return (
     <>
-      <h2>Edit your Routine</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Updated name:
+      <div className="editRoutine">
+        <h2>Edit your Routine</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Updated name:
+            <br />
+            <input
+              type="text"
+              required
+              name="name"
+              defaultValue={name}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Updated goal:
+            <br />
+            <input
+              type="text"
+              required
+              name="goal"
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>Is public?</label>
+          <br />
           <input
-            type="text"
-            required
-            name="name"
-            defaultValue={name}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Updated goal:
-          <input
-            type="text"
-            required
-            name="goal"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>Is public?</label>
-        <input
-          type="checkbox"
-          checked={isPublic}
-          name="ispublic"
-          onChange={() => setIsPublic(!isPublic)}
-        ></input>
-        <br />
-        <br />
-        <input type="submit" value="Edit Routine" />
-      </form>
+            id="isPublic"
+            type="checkbox"
+            checked={isPublic}
+            name="ispublic"
+            onChange={() => setIsPublic(!isPublic)}
+          ></input>
+          <br />
+          <input type="submit" value="Edit Routine" />
+        </form>
+      </div>
     </>
   );
 };

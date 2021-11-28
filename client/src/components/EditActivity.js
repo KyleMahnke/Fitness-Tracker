@@ -33,33 +33,37 @@ const EditActivity = ({ routineActivityId }) => {
   console.log("ROUTINEACTIVITYID:", routineActivityId);
   return (
     <>
-      <h2>Edit your Activity</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Updated count:
-          <input
-            type="text"
-            required
-            name="count"
-            defaultValue={count}
-            value={count}
-            onChange={(e) => setCount(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Updated duration:
-          <input
-            type="text"
-            required
-            name="duration"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-          />
-        </label>
-        <br />
-        <input type="submit" value="Edit Activity" />
-      </form>
+      <div className="editActivity">
+        <h2>Edit your Activity</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Updated count:
+            <br />
+            <input
+              type="text"
+              required
+              name="count"
+              defaultValue={count}
+              value={count}
+              onChange={(e) => setCount(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Updated duration:
+            <br />
+            <input
+              type="text"
+              required
+              name="duration"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+            />
+          </label>
+          <br />
+          <input type="submit" value="Edit Activity" />
+        </form>
+      </div>
     </>
   );
 };

@@ -34,44 +34,46 @@ const NewActivity = ({ isLoggedIn }) => {
 
   return (
     <>
-      {isLoggedIn ? (
-        <>
-          <h2>Create New Activity</h2>
-          {successMessage ? <h4>{successMessage}</h4> : null}
-          <form className="createPostForm" onSubmit={handleSubmit}>
-            <label>
-              Activity Name:
+      <div className="createActivityPage">
+        {isLoggedIn ? (
+          <>
+            <h2>Create New Activity</h2>
+            {successMessage ? <h4>{successMessage}</h4> : null}
+            <form className="createPostForm" onSubmit={handleSubmit}>
+              <label>
+                Activity Name:
+                <br />
+                <input
+                  type="text"
+                  required
+                  name="name"
+                  placeholder="add activity name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
               <br />
-              <input
-                type="text"
-                required
-                name="name"
-                placeholder="add activity name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Description:
+              <label>
+                Description:
+                <br />
+                <input
+                  type="text"
+                  required
+                  name="description"
+                  placeholder="add description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </label>
               <br />
-              <input
-                type="text"
-                required
-                name="description"
-                placeholder="add description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-            <br />
-            <br />
-            <input type="submit" value="Create Activity" />
-          </form>
-        </>
-      ) : (
-        <h1>Please log in to create a new activity</h1>
-      )}
+              <br />
+              <input type="submit" value="Create Activity" />
+            </form>
+          </>
+        ) : (
+          <h1>Please log in to create a new activity</h1>
+        )}
+      </div>
     </>
   );
 };

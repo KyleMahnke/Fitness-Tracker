@@ -76,8 +76,8 @@ const MyRoutines = ({
       setRoutines(data2);
     }
   };
-  
-// handleDeleteActivity not working correctly. Gives auth error if hardcoded routineActivityId. 
+
+  // handleDeleteActivity not working correctly. Gives auth error if hardcoded routineActivityId.
   const handleDeleteActivity = async (routineActivityId) => {
     const response = await fetch(
       `http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`,
@@ -95,67 +95,72 @@ const MyRoutines = ({
 
   return (
     <>
-      {errorMessage ? <p>{errorMessage}</p> : null}
-      <h1>These are my routines, bruhh</h1>
-      <Link to="/createroutine">
-        <button>Create New Routine</button>
-      </Link>
-      {routines.map((routine) => (
-        <div>
-          <h2>Routine: {routine.name}</h2>
-          <h3>Goal: {routine.goal}</h3>
-          <h3>Creator Name: {routine.creatorName}</h3>
-          {console.log(routine.id)}
-          {routine.activities.length ? (
-            <>
-              <h4>Activities:</h4>
-              <ul>
-                {routine.activities.map((activity) => (
-                  <>
-                    <li>
-                      {activity.name}: {activity.description}
-                    </li>
-                    <li>Number of reps: {activity.count}</li>
-                    <li>Duration: {activity.duration}</li>
-                    <Link to="/editactivity">
-                      <button
-                        onClick={() =>
-                          setRoutineActivityId(activity.routineActivityId)
-                        }
-                      >
-                        Edit Activities
-                      </button>
-                    </Link>
-                    <Link>
-                      <button onClick={handleDeleteActivity(routineActivityId)}>
-                        {/* THIS GOES INSIDE BUTTON TAG RIGHT THURR ^^ onClick={handleDeleteActivity(routineActivityId)} */}
-                        Delete Activity from Routine - not working yet
-                      </button>
-                    </Link>
-                    <br />
-                  </>
-                ))}
-              </ul>
-            </>
-          ) : null}
-          <Link to="/addactivities">
-            <button onClick={() => setRoutineId(routine.id)}>
-              Add Activities
+      <div className="myRoutines">
+        {errorMessage ? <p>{errorMessage}</p> : null}
+        <h1>These are my routines, bruhh.</h1>
+        <Link to="/createroutine">
+          <button className="createNewRoutine">Create New Routine</button>
+        </Link>
+        {routines.map((routine) => (
+          <div className="myRoutineInfo">
+            <h2>Routine: {routine.name}</h2>
+            <h3>Goal: {routine.goal}</h3>
+            <h3>Creator Name: {routine.creatorName}</h3>
+            {console.log(routine.id)}
+            {routine.activities.length ? (
+              <>
+                <h4>Activities:</h4>
+                <ul>
+                  {routine.activities.map((activity) => (
+                    <>
+                      <li>
+                        {activity.name}: {activity.description}
+                      </li>
+                      <li>Number of reps: {activity.count}</li>
+                      <li>Duration: {activity.duration}</li>
+                      <Link to="/editactivity">
+                        <button
+                          onClick={() =>
+                            setRoutineActivityId(activity.routineActivityId)
+                          }
+                        >
+                          Edit Activities
+                        </button>
+                      </Link>
+                      <Link>
+                        <button
+                          onClick={handleDeleteActivity(routineActivityId)}
+                        >
+                          {/* THIS GOES INSIDE BUTTON TAG RIGHT THURR ^^ onClick={handleDeleteActivity(routineActivityId)} */}
+                          Delete Activity from Routine - not working yet
+                        </button>
+                      </Link>
+                      <br />
+                    </>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+            <Link to="/addactivities">
+              <button onClick={() => setRoutineId(routine.id)}>
+                Add Activities
+              </button>
+            </Link>
+            <Link to="/editroutine">
+              <button onClick={() => setRoutineId(routine.id)}>
+                Edit Routine Name/Goal
+              </button>
+            </Link>
+            <br />
+            <button
+              className="addRoutine"
+              onClick={() => handleDeleteRoutine(routine.id)}
+            >
+              Delete Routine
             </button>
-          </Link>
-          <Link to="/editroutine">
-            <button onClick={() => setRoutineId(routine.id)}>
-              Edit Routine Name/Goal
-            </button>
-          </Link>
-          <button
-            className="addRoutine"
-            onClick={() => handleDeleteRoutine(routine.id)}
-          >
-            Delete Routine
-          </button>
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </>
   );
 };
