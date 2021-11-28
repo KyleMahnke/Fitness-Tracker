@@ -9,9 +9,9 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
     history.push("/");
   };
   return (
-    <nav className="navbar">
-      <h1 className="title">Riz, Kyle, & Mark's Fitness Tracker!</h1>
-      <div className="links">
+    <nav id="navbar">
+      <h1 id="title">Riz, Kyle, & Mark's Fitness Tracker!</h1>
+      <div id="links">
         <Link className="navLinks" to="/">
           Home
         </Link>

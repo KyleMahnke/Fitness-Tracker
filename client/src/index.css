@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.navbar {
+#navbar {
   align-items: center;
   display: flex;
   flex-direction: column-reverse;
@@ -23,7 +23,7 @@ body {
   /* font-size: 100%; */
 }
 
-.title {
+#title {
   margin-left: 20px;
   /* float: left; */
   order: 1;
