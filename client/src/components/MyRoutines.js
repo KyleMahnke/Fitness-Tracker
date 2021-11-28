@@ -99,7 +99,7 @@ const MyRoutines = ({
         {errorMessage ? <p>{errorMessage}</p> : null}
         <h1 className="routinesTitle">These are my routines, bruhh.</h1>
         <Link to="/createroutine">
-          <button className="createNewRoutine">Create New Routine</button>
+          <button id="createNewRoutine">Create New Routine</button>
         </Link>
         {routines.map((routine) => (
           <div className="myRoutineInfo">
@@ -153,6 +153,7 @@ const MyRoutines = ({
                 Edit Routine Name/Goal
               </button>
             </Link>
+            <br />
             <br />
             <button
               className="addRoutine"

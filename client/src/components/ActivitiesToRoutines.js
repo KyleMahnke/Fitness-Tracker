@@ -93,7 +93,8 @@ const ActivitiesToRoutines = ({ routineId }) => {
             />
           </label>
           <br />
-          <button type="submit">Add Activity</button>
+          {/* <button type="submit">Add Activity</button> */}
+          <input type="submit" value="Add Activity" />
         </form>
       </div>
     </>

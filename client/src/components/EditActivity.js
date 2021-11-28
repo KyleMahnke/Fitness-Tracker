@@ -11,8 +11,7 @@ const EditActivity = ({ routineActivityId }) => {
     const TOKEN = window.localStorage.getItem("token");
 
     const response = await fetch(
-      `http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}
-            `,
+      `http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`,
       {
         method: "PATCH",
         headers: {

@@ -45,7 +45,7 @@ body {
 
 .thirsty,
 .createNewActivity,
-.createNewRoutine {
+#createNewRoutine {
   border-radius: 1px;
   box-shadow: 0 5px 10px 0 rgb(0 0 0 / 50%);
   height: 30px;
@@ -56,11 +56,6 @@ body {
 .thirsty {
   width: 120px;
   font-size: 15px;
-}
-
-.createNewRoutine,
-.createNewActivity {
-  margin-bottom: 10px;
 }
 
 .thirsty:hover,
@@ -182,7 +177,7 @@ body {
   text-align: center;
 }
 
-.createNewRoutine,
+#createNewRoutine,
 .createNewActivity {
   margin-bottom: 15px;
   font-size: 18px;
