@@ -77,7 +77,6 @@ const MyRoutines = ({
     }
   };
 
-  // handleDeleteActivity not working correctly. Gives auth error if hardcoded routineActivityId.
   const handleDeleteActivity = async (routineActivityId) => {
     const response = await fetch(
       `http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`,
@@ -91,6 +90,7 @@ const MyRoutines = ({
     );
     const data = await response.json();
     console.log(data);
+    location.reload();
   };
 
   return (
@@ -134,7 +134,7 @@ const MyRoutines = ({
                             handleDeleteActivity(activity.routineActivityId)
                           }
                         >
-                          Delete Activity from Routine - not working yet
+                          Delete Activity from Routine
                         </button>
                       </Link>
                       <br />
