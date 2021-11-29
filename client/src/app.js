@@ -12,7 +12,6 @@ import NewRoutine from "./components/NewRoutine";
 import ActivitiesToRoutines from "./components/ActivitiesToRoutines";
 import EditRoutine from "./components/EditRoutine";
 import EditActivity from "./components/EditActivity";
-import UsersRoutines from "./components/UsersRoutines";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
