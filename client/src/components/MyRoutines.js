@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const token = localStorage.getItem("token");
+const TOKEN = localStorage.getItem("token");
 
 const MyRoutines = ({
   username,
@@ -10,6 +10,7 @@ const MyRoutines = ({
 }) => {
   const [routines, setRoutines] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  // const [routineActivityId, setRoutineActivityId] = useState("")
 
   useEffect(() => {
     const getMyRoutines = async () => {
@@ -29,12 +30,12 @@ const MyRoutines = ({
         return;
       }
 
-      console.log("DATA ", data);
       if (data.error) {
         setErrorMessage("No routine exists for this user.");
       } else {
         console.log(data);
         setRoutines(data);
+        setErrorMessage("");
       }
     };
     getMyRoutines();
@@ -47,7 +48,7 @@ const MyRoutines = ({
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
       }
     );
@@ -60,7 +61,6 @@ const MyRoutines = ({
         },
       }
     );
-    console.log("HEERERERERERERE", response2);
     let data2;
     try {
       data2 = await response2.json();
@@ -73,6 +73,7 @@ const MyRoutines = ({
       setErrorMessage("No routine exists for this user.");
     } else {
       console.log(data2);
+      setErrorMessage("");
       setRoutines(data2);
     }
   };
@@ -84,7 +85,7 @@ const MyRoutines = ({
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
       }
     );
@@ -95,6 +96,7 @@ const MyRoutines = ({
 
   return (
     <>
+      {console.log("TOKENNNNNN:", TOKEN)}
       <div className="myRoutines">
         {errorMessage ? <p>{errorMessage}</p> : null}
         <h1 className="routinesTitle">These are my routines, bruhh.</h1>
@@ -106,7 +108,6 @@ const MyRoutines = ({
             <h2>Routine: {routine.name}</h2>
             <h3>Goal: {routine.goal}</h3>
             <h3>Creator Name: {routine.creatorName}</h3>
-            {console.log(routine.id)}
             {routine.activities.length ? (
               <>
                 <h4>Activities:</h4>
@@ -121,14 +122,14 @@ const MyRoutines = ({
                       <Link to="/editactivity">
                         <button
                           onClick={() =>
-                            setRoutineActivityId(routineActivityId)
+                            setRoutineActivityId(activity.routineActivityId)
                           }
                         >
-                          Edit Activities
+                          Edit Activity
                         </button>
                       </Link>
                       {/* deletes the activity if you hard-refresh the page after clicking the delete button */}
-                      <Link>
+                      <Link to="/myroutines">
                         <button
                           onClick={() =>
                             handleDeleteActivity(activity.routineActivityId)

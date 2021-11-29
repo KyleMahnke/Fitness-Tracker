@@ -31,11 +31,21 @@ async function getAllRoutines() {
   return attachActivitiesToRoutines(rows);
 }
 
-async function getAllRoutinesByUser({ username }) {}
+async function getAllRoutinesByUser({ username }) {
+  const { rows: routines } = await client.query(
+    `
+  SELECT routines.*, username
+  FROM routines
+  JOIN users ON "creatorId" = users.id
+  WHERE users.id = ${username}
+  `,
+    [username]
+  );
+}
 
-async function getPublicRoutinesByUser({ username }) {}
+// async function getPublicRoutinesByUser({ username }) {}
 
-async function getAllPublicRoutines() {}
+// async function getAllPublicRoutines() {}
 
 async function getPublicRoutinesByActivity({ id }) {}
 

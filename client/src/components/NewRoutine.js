@@ -6,6 +6,7 @@ const NewRoutine = ({ isLoggedIn }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,15 +28,19 @@ const NewRoutine = ({ isLoggedIn }) => {
       }
     );
     const data = await response.json();
-    console.log(data);
-    if (data.id) {
+
+    if (data.error) {
+      setErrorMessage("Routine name/goal already exists. Please try again.");
+    } else if (data.id) {
       history.push("/myroutines");
+      setErrorMessage("");
     }
   };
 
   return (
     <>
       <div className="createRoutinePage">
+        {errorMessage ? <p>{errorMessage}</p> : null}
         {isLoggedIn ? (
           <>
             <h2>Create your new routine!</h2>

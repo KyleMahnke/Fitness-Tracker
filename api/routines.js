@@ -1,7 +1,17 @@
-const express = require('express');
-const router = express.Router();
+const express = require("express");
+const { getAllRoutines } = require("../db");
+const routinesRouter = express.Router();
+const { requireUser } = require("./utils");
 
 // GET /api/routines
+
+routinesRouter.get("/", async (req, res) => {
+  const routines = await getAllRoutines();
+
+  res.send({
+    routines,
+  });
+});
 
 // POST /api/routines
 
@@ -11,4 +21,4 @@ const router = express.Router();
 
 // POST /api/routines/:routineId/activities
 
-module.exports = router;
+module.exports = routinesRouter;
